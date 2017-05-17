@@ -9,27 +9,31 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        mainCam = Camera.main;
     }
 
     Vector3 walkInput()
     {
-        mainCam = Camera.main;
+
         Vector3 direction = new Vector3();
         Vector3 cameraDirection = new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z);
         direction.z = Input.GetAxis("Vertical");
         direction.x = Input.GetAxis("Horizontal");
 
-        direction.Normalize();
-        cameraDirection.Normalize();
+        //direction.Normalize();
+        //cameraDirection.Normalize();
 
         direction *= walkSpeed * Time.deltaTime;
+        mainCam.transform.position += direction;
+        transform.forward = cameraDirection - direction;
         return direction;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        
-        transform.position += walkInput();
+        if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        {
+            transform.position += walkInput();
+        }
     }
 }

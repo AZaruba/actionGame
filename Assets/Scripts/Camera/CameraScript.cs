@@ -5,10 +5,13 @@ public class CameraScript : MonoBehaviour
 {
 
     public RenderTexture renderTexture;
+    public float xSensitivity;
+    public float ySensitivity;
+    private GameObject player;
 
     void Start()
     {
-
+        player = GameObject.Find("Player");
     }
 
     void OnGUI()
@@ -19,6 +22,8 @@ public class CameraScript : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(GameObject.Find("Player").transform);
+        transform.LookAt(player.transform.position);
+        transform.RotateAround(player.transform.position, Vector3.up, Input.GetAxis("RHorizontal") * xSensitivity);
+        transform.RotateAround(player.transform.position, transform.forward, Input.GetAxis("RVertical") * ySensitivity);
     }    
 }
