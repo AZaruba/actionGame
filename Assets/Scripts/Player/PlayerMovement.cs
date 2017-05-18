@@ -16,16 +16,16 @@ public class PlayerMovement : MonoBehaviour {
     {
 
         Vector3 direction = new Vector3();
-        Vector3 cameraDirection = new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z);
-        direction.z = Input.GetAxis("Vertical");
-        direction.x = Input.GetAxis("Horizontal");
+		Vector3 cameraDirection = new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z);
+		direction.z = Input.GetAxis("Vertical");
+		direction.x = Input.GetAxis("Horizontal");
 
-        //direction.Normalize();
-        //cameraDirection.Normalize();
+        direction.Normalize();
+        cameraDirection.Normalize();
 
         direction *= walkSpeed * Time.deltaTime;
-        mainCam.transform.position += direction;
-        transform.forward = cameraDirection - direction;
+		mainCam.transform.position += direction;
+		transform.rotation = Quaternion.LookRotation(direction);
         return direction;
     }
 	
@@ -33,7 +33,10 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
-            transform.position += walkInput();
+			transform.position += walkInput();
         }
+
+		if (Input.GetKey (KeyCode.Escape))
+			Application.Quit ();
     }
 }
