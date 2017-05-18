@@ -12,6 +12,10 @@ public class CameraScript : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+		renderTexture.width = Screen.width / 4;
+		renderTexture.height = Screen.height / 4;
+		Camera.main.ResetAspect ();
+		Camera.main.targetTexture = renderTexture;
     }
 
     void OnGUI()
