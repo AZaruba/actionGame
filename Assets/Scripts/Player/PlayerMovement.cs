@@ -17,8 +17,12 @@ public class PlayerMovement : MonoBehaviour {
 
         Vector3 direction = new Vector3();
 		Vector3 cameraDirection = new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z);
+		float rotationDegree;
 		direction.z = Input.GetAxis("Vertical");
-		direction.x = Input.GetAxis("Horizontal");
+		direction.x = -Input.GetAxis("Horizontal");
+		rotationDegree = Mathf.Atan2 (direction.z, direction.x);
+		direction.x = -cameraDirection.z * Mathf.Cos (rotationDegree) + cameraDirection.x * Mathf.Sin (rotationDegree);
+		direction.z = cameraDirection.z * Mathf.Sin (rotationDegree) + cameraDirection.x * Mathf.Cos (rotationDegree);
 
         direction.Normalize();
         cameraDirection.Normalize();
@@ -32,7 +36,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
-        {
+		{
 			transform.position += walkInput();
         }
 
