@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour {
 	private bool grounded;
 	private bool falling;
 
+	private Vector3 downRay = new Vector3(0, -1, 0);
+
 	// Use this for initialization
 	void Start () {
         mainCam = Camera.main;
@@ -46,8 +48,15 @@ public class PlayerMovement : MonoBehaviour {
 		if (currentJumpSpeed < 0 && !grounded) {
 			falling = true;
 		}
-		if (currentPosition.y < 0 && !grounded && falling) {
+		if (Physics.Raycast(transform.position, downRay, 1) && !grounded && falling) {
 			transform.position = new Vector3 (currentPosition.x, 0, currentPosition.z);
+			currentJumpSpeed = 0;
+			grounded = true;
+			falling = false;
+		}
+
+		if (currentPosition.y < -5.0f) {
+			transform.position = new Vector3 (0, 0, 0);
 			currentJumpSpeed = 0;
 			grounded = true;
 			falling = false;
