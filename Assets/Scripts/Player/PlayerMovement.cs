@@ -11,18 +11,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private Camera mainCam;
 	private float currentJumpSpeed;
-	private uint playerState; // efficient storage of playerstate
-	                          /*
-	                           * 00000000
-	                           * |||||||L0th: 0 - Jumping,    1 - Grounded
-	                           * ||||||L 1st: 0 - n/Attack,   1 - Attacking
-	                           * |||||L  2nd: 0 - Ready,      1 - Not Ready (attack animations begin when ready)
-	                           * ||||L   3rd: 0 - Vulnerable, 1 - iframes
-	                           * |||L    4th: 0 - Vulnerable, 1 - Blocking/dodging
-	                           * ||L     5th: 0 - Healhty,    1 - Critical (0HP remaining)
-	                           * |L      6th: 0 - Charging,   1 - Charged
-	                           * |       7th: 0 - Ready,      1 - Stunned
-	                           */
+	private bool grounded;
+	private bool falling;
 
 	// Use this for initialization
 	void Start () {
@@ -50,26 +40,32 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 	Vector3 jumpInput(Vector3 currentPosition) {
-		if (currentJumpSpeed > -terminalVelocity) {
+		if (currentJumpSpeed > -terminalVelocity && !grounded) {
 			currentJumpSpeed -= gravity;
-		} else {
-			transform.position = new Vector3(currentPosition.x, 0, currentPosition.z);
-			return new Vector3 (0, 0, 0);
 		}
-
+		if (currentJumpSpeed < 0 && !grounded) {
+			falling = true;
+		}
+		if (currentPosition.y < 0 && !grounded && falling) {
+			transform.position = new Vector3 (currentPosition.x, 0, currentPosition.z);
+			currentJumpSpeed = 0;
+			grounded = true;
+			falling = false;
+		}
 		return new Vector3 (0, currentJumpSpeed, 0);
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
 		{
 			transform.position += walkInput();
         }
-		if (Input.GetKeyDown (KeyCode.B))
+		if (Input.GetKeyDown (KeyCode.B) && grounded)
 		{
 			currentJumpSpeed = jumpSpeed;
+			grounded = false;
 
 		}
 		transform.position += jumpInput (transform.position);
