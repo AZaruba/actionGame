@@ -1,17 +1,17 @@
-Status Report: 5/16/17
+Status Report: 5/23/17
 
 Accomplishments:
   - Game started!
   - Camera movement relative to player working
-  - Player movement working, need it to be relative to camera
+  - Player movement working including jumping and universal collision
   - Looks very PlayStation 1-ish :)
 
-To-Do (5/17-5/20):
-  - Make player movement work relative to camera
-    - This requires having the input axis vector to be transformed to the space
-      formed by the vector CAMERA->PLAYER
+To-Do (5/24-5/28):
+  - Fix the camera going wonky on landing
+  - Implement falling off ledges (so we don't have to jump to start falling)
   - Implement some state change (i.e. attacking)
     - Reflect the state change via some visual indicator (texture change?)
 
 Stretch Goal:
   - Add some form of heads-up UI (health in text, for example)
+  - Start modeling!! Make a cool world (like a beach and a glass platform!)
