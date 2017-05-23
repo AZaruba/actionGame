@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         mainCam = Camera.main;
+        grounded = false;
     }
 
     Vector3 walkInput()
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 direction = new Vector3();
 		Vector3 cameraDirection = new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z);
 		float rotationDegree;
-
+        
 		rotationDegree = Mathf.Atan2 (Input.GetAxis("Vertical"), -Input.GetAxis("Horizontal"));
 		direction.x = -cameraDirection.z * Mathf.Cos (rotationDegree) + cameraDirection.x * Mathf.Sin (rotationDegree);
 		direction.z = cameraDirection.z * Mathf.Sin (rotationDegree) + cameraDirection.x * Mathf.Cos (rotationDegree);
@@ -49,18 +50,22 @@ public class PlayerMovement : MonoBehaviour {
 			falling = true;
 		}
 		if (Physics.Raycast(transform.position, downRay, 1) && !grounded && falling) {
+            Vector3 currentCameraPos = mainCam.transform.position;
 			transform.position = new Vector3 (currentPosition.x, 0, currentPosition.z);
+            mainCam.transform.position = new Vector3(currentCameraPos.x, 2, currentCameraPos.z);
 			currentJumpSpeed = 0;
 			grounded = true;
 			falling = false;
 		}
 
 		if (currentPosition.y < -5.0f) {
-			transform.position = new Vector3 (0, 0, 0);
+			transform.position = new Vector3 (0, 0, 6);
+            mainCam.transform.position = new Vector3(0, 2, 0);
 			currentJumpSpeed = 0;
 			grounded = true;
 			falling = false;
 		}
+
 		return new Vector3 (0, currentJumpSpeed, 0);
 
 	}
@@ -71,13 +76,16 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			transform.position += walkInput();
         }
-		if (Input.GetKeyDown (KeyCode.B) && grounded)
+		if (Input.GetKeyDown (KeyCode.Space) && grounded)
 		{
 			currentJumpSpeed = jumpSpeed;
 			grounded = false;
 
 		}
-		transform.position += jumpInput (transform.position);
+        Vector3 jumpResult = jumpInput(transform.position);
+		transform.position += jumpResult;
+        //mainCam.transform.position += new Vector3(1, 1, 1);
+
 
 		if (Input.GetKey (KeyCode.Escape))
 			Application.Quit ();
