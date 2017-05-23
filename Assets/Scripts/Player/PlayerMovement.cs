@@ -14,12 +14,21 @@ public class PlayerMovement : MonoBehaviour {
 	private bool grounded;
 	private bool falling;
 
-	private Vector3 downRay = new Vector3(0, -1, 0);
+    private RaycastHit groundOut; // gets information for objects below the player
+    private float colliderX;
+    private float colliderY;
+    private float colliderZ;
+
+	private Vector3 downRay = new Vector3(0, -1, 0); // the ray casting downward in global space
 
 	// Use this for initialization
 	void Start () {
         mainCam = Camera.main;
         grounded = false;
+        Vector3 colliderInfo = GetComponent<Collider>().bounds.size;
+        colliderX = colliderInfo.x / 2;
+        colliderY = colliderInfo.y / 2;
+        colliderZ = colliderInfo.z / 2;
     }
 
     Vector3 walkInput()
@@ -49,10 +58,10 @@ public class PlayerMovement : MonoBehaviour {
 		if (currentJumpSpeed < 0 && !grounded) {
 			falling = true;
 		}
-		if (Physics.Raycast(transform.position, downRay, 1) && !grounded && falling) {
+		if (Physics.Raycast(transform.position, downRay, out groundOut, 0.1f) && !grounded && falling) {
             Vector3 currentCameraPos = mainCam.transform.position;
-			transform.position = new Vector3 (currentPosition.x, 0, currentPosition.z);
-            mainCam.transform.position = new Vector3(currentCameraPos.x, 2, currentCameraPos.z);
+			transform.position = new Vector3 (groundOut.point.x, groundOut.point.y + colliderY, groundOut.point.z);
+            mainCam.transform.position = new Vector3(currentCameraPos.x, groundOut.point.y + colliderY + 2, currentCameraPos.z);
 			currentJumpSpeed = 0;
 			grounded = true;
 			falling = false;
@@ -84,7 +93,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
         Vector3 jumpResult = jumpInput(transform.position);
 		transform.position += jumpResult;
-        //mainCam.transform.position += new Vector3(1, 1, 1);
+        mainCam.transform.position += jumpResult;
 
 
 		if (Input.GetKey (KeyCode.Escape))
