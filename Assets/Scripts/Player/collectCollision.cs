@@ -12,12 +12,13 @@ public class collectCollision : MonoBehaviour {
 	void Start () {
 		layerMask = 1 << 8;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		hitArray = Physics.OverlapSphere (transform.position, 1.0f, layerMask);
-		if (hitArray.Length > 0) {
-			Destroy (hitArray [0].gameObject);
-		}
-	}
+
+    public void coinCollision()
+    {
+        hitArray = Physics.OverlapSphere(transform.position, 1.0f, layerMask);
+        if (hitArray.Length > 0)
+        {
+            Destroy(hitArray[0].gameObject);
+        }
+    }
 }

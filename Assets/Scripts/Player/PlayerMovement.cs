@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float currentJumpSpeed;
 	private bool grounded;
 	private bool falling;
+    private bool attacking;
 
     private RaycastHit groundOut; // gets information for objects below the player
     private float colliderX;
@@ -20,11 +21,13 @@ public class PlayerMovement : MonoBehaviour {
     private float colliderZ;
 
 	private Vector3 downRay = new Vector3(0, -1, 0); // the ray casting downward in global space
+    private int envMask = 1 << 9;
 
 	// Use this for initialization
 	void Start () {
         mainCam = Camera.main;
         grounded = false;
+        attacking = false;
         Vector3 colliderInfo = GetComponent<Collider>().bounds.size;
         colliderX = colliderInfo.x / 2;
         colliderY = colliderInfo.y / 2;
@@ -58,7 +61,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (currentJumpSpeed < 0 && !grounded) {
 			falling = true;
 		}
-		if (Physics.Raycast(transform.position, downRay, out groundOut, 0.2f) && !grounded && falling) {
+		if (Physics.Raycast(transform.position, downRay, out groundOut, 0.2f, envMask) && !grounded && falling) {
             Vector3 currentCameraPos = mainCam.transform.position;
 			transform.position = new Vector3 (groundOut.point.x, groundOut.point.y + colliderY, groundOut.point.z);
             mainCam.transform.position = new Vector3(currentCameraPos.x, groundOut.point.y + colliderY + 2, currentCameraPos.z);
@@ -90,15 +93,25 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			transform.position += walkInput();
         }
-		if (Input.GetKeyDown (KeyCode.Space) && grounded)
+		if (Input.GetKeyDown (KeyCode.Space) && grounded && !attacking)
 		{
 			currentJumpSpeed = jumpSpeed;
 			grounded = false;
 
 		}
+        if (Input.GetKeyDown (KeyCode.B) && !attacking)
+        {
+            attacking = true;
+            transform.Rotate(45, 0, 45);
+            transform.Rotate(-45, 0, -45);
+            attacking = false;
+
+        }
         Vector3 jumpResult = jumpInput(transform.position);
 		transform.position += jumpResult;
         mainCam.transform.position += jumpResult;
+
+        this.gameObject.GetComponent<collectCollision>().coinCollision();
 
 
 		if (Input.GetKey (KeyCode.Escape))
