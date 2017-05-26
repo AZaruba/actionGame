@@ -1,16 +1,17 @@
-Status Report: 5/23/17
+Status Report: 5/25/17
 
 Accomplishments:
-  - Game started!
-  - Camera movement relative to player working
-  - Player movement working including jumping and universal collision
-  - Looks very PlayStation 1-ish :)
+  - Falling off ledges from collision now works!
+  - Coin collection is now implemented via collision layer 8
 
-To-Do (5/24-5/28):
-  - Fix the camera going wonky on landing
-  - Implement falling off ledges (so we don't have to jump to start falling)
+To-Do (5/26-6/02):
+  - Score tracking!
+  - Split up collision detection into a single script
+    - I'm thinking one collider per object type
+    - Check if the layerMask word can be used to do this in one sweep
   - Implement some state change (i.e. attacking)
     - Reflect the state change via some visual indicator (texture change?)
+  - Start building a real level! (blender)
 
 Stretch Goal:
   - Add some form of heads-up UI (health in text, for example)

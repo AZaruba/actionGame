@@ -58,13 +58,18 @@ public class PlayerMovement : MonoBehaviour {
 		if (currentJumpSpeed < 0 && !grounded) {
 			falling = true;
 		}
-		if (Physics.Raycast(transform.position, downRay, out groundOut, 0.1f) && !grounded && falling) {
+		if (Physics.Raycast(transform.position, downRay, out groundOut, 0.2f) && !grounded && falling) {
             Vector3 currentCameraPos = mainCam.transform.position;
 			transform.position = new Vector3 (groundOut.point.x, groundOut.point.y + colliderY, groundOut.point.z);
             mainCam.transform.position = new Vector3(currentCameraPos.x, groundOut.point.y + colliderY + 2, currentCameraPos.z);
 			currentJumpSpeed = 0;
 			grounded = true;
 			falling = false;
+		}
+		if (grounded && !Physics.Raycast(transform.position, downRay, 0.1f + colliderY)) {
+			grounded = false;
+			falling = true;
+			currentJumpSpeed = 0;
 		}
 
 		if (currentPosition.y < -5.0f) {
