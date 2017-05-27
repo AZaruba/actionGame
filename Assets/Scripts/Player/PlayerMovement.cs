@@ -6,14 +6,18 @@ public class PlayerMovement : MonoBehaviour {
 
     public float walkSpeed;
 	public float jumpSpeed;
+	public float dashSpeed;
 	public float gravity;
 	public float terminalVelocity;
+	public float dashDistance;
 
     private Camera mainCam;
 	private float currentJumpSpeed;
+
 	private bool grounded;
 	private bool falling;
     private bool attacking;
+	private bool dashing;
 
     private RaycastHit groundOut; // gets information for objects below the player
     private float colliderX;
@@ -28,6 +32,7 @@ public class PlayerMovement : MonoBehaviour {
         mainCam = Camera.main;
         grounded = false;
         attacking = false;
+		dashing = false;
         Vector3 colliderInfo = GetComponent<Collider>().bounds.size;
         colliderX = colliderInfo.x / 2;
         colliderY = colliderInfo.y / 2;
@@ -45,8 +50,8 @@ public class PlayerMovement : MonoBehaviour {
 		direction.x = -cameraDirection.z * Mathf.Cos (rotationDegree) + cameraDirection.x * Mathf.Sin (rotationDegree);
 		direction.z = cameraDirection.z * Mathf.Sin (rotationDegree) + cameraDirection.x * Mathf.Cos (rotationDegree);
 
-        direction.Normalize();
-        cameraDirection.Normalize();
+        //direction.Normalize();
+        //cameraDirection.Normalize();
 
         direction *= walkSpeed * Time.deltaTime;
 		mainCam.transform.position += direction;
@@ -81,10 +86,19 @@ public class PlayerMovement : MonoBehaviour {
 			currentJumpSpeed = 0;
 			grounded = true;
 			falling = false;
+			GetComponent<reset> ().backToOne ();
 		}
 
 		return new Vector3 (0, currentJumpSpeed, 0);
 
+	}
+
+	void dashInput(Vector3 direction, float delta) {
+		if (delta == dashDistance) {
+			dashing = false;
+		} else {
+
+		}
 	}
 
 	// Update is called once per frame
@@ -93,17 +107,17 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			transform.position += walkInput();
         }
-		if (Input.GetKeyDown (KeyCode.Space) && grounded && !attacking)
+		if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton13)) && grounded && !attacking)
 		{
 			currentJumpSpeed = jumpSpeed;
 			grounded = false;
 
 		}
-        if (Input.GetKeyDown (KeyCode.B) && !attacking)
+		if ((Input.GetKeyDown (KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton14))&& !attacking)
         {
             attacking = true;
-            transform.Rotate(45, 0, 45);
-            transform.Rotate(-45, 0, -45);
+            transform.Rotate(45, 0, 0);
+            transform.Rotate(-45, 0, 0);
             attacking = false;
 
         }

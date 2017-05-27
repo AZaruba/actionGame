@@ -8,9 +8,20 @@ public class collectCollision : MonoBehaviour {
 	private Collider[] hitArray;
 	private int layerMask;
 
+	private int coinCount;
+
 	// Use this for initialization
 	void Start () {
 		layerMask = 1 << 8;
+		coinCount = 0;
+	}
+
+	public int getCoinCount() {
+		return this.coinCount;
+	}
+
+	public void setCoinCount(int count) {
+		this.coinCount = count;
 	}
 
     public void coinCollision()
@@ -19,6 +30,7 @@ public class collectCollision : MonoBehaviour {
         if (hitArray.Length > 0)
         {
             Destroy(hitArray[0].gameObject);
+			coinCount++;
         }
     }
 }

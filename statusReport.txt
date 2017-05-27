@@ -1,18 +1,21 @@
-Status Report: 5/25/17
+Status Report: 5/26/17
 
 Accomplishments:
   - Falling off ledges from collision now works!
   - Coin collection is now implemented via collision layer 8
+  - Coin collection tracked in the UI!
+  - on "death" everything resets back to one!
 
 To-Do (5/26-6/02):
-  - Score tracking!
   - Split up collision detection into a single script
-    - I'm thinking one collider per object type
-    - Check if the layerMask word can be used to do this in one sweep
+    - This MAY not work, given the jumpy mess it was when I tried it
   - Implement some state change (i.e. attacking)
     - Reflect the state change via some visual indicator (texture change?)
   - Start building a real level! (blender)
+  - build a better coin (gem!) model
+  - implement an enemy
 
 Stretch Goal:
-  - Add some form of heads-up UI (health in text, for example)
-  - Start modeling!! Make a cool world (like a beach and a glass platform!)
+  - Add some form of heads-up UI (DONE!!!!)
+  - Start making a hero
+  - Dodging
