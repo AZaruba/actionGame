@@ -31,6 +31,8 @@ public class collectCollision : MonoBehaviour {
         {
             Destroy(hitArray[0].gameObject);
 			coinCount++;
+			GameObject scores = GameObject.FindGameObjectWithTag ("metrics");
+			scores.GetComponent<coinUpdate> ().collectCoin ();
         }
     }
 }
