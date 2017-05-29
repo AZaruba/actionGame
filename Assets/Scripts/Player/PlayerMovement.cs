@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	Vector3 jumpInput(Vector3 currentPosition) {
 		if (currentJumpSpeed > -terminalVelocity && !grounded) {
-			currentJumpSpeed -= gravity;
+			currentJumpSpeed -= gravity * Time.deltaTime;
 		}
 		if (currentJumpSpeed < 0 && !grounded) {
 			falling = true;
