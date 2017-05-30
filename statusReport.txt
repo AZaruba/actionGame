@@ -1,21 +1,23 @@
-Status Report: 5/26/17
+Status Report: 5/29/17
 
 Accomplishments:
   - Falling off ledges from collision now works!
   - Coin collection is now implemented via collision layer 8
   - Coin collection tracked in the UI!
   - on "death" everything resets back to one!
+  
+  - Two gem models made and successfully imported
 
-To-Do (5/26-6/02):
+To-Do (5/29-6/02):
+  - Figure out good lighting so the gems are readable in low resolution
   - Split up collision detection into a single script
     - This MAY not work, given the jumpy mess it was when I tried it
   - Implement some state change (i.e. attacking)
     - Reflect the state change via some visual indicator (texture change?)
   - Start building a real level! (blender)
-  - build a better coin (gem!) model
-  - implement an enemy
 
 Stretch Goal:
   - Add some form of heads-up UI (DONE!!!!)
   - Start making a hero
   - Dodging
+  - Implement an enemy
