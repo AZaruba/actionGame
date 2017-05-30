@@ -84,11 +84,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GUI\coinUpdate.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Environment\Rotation.cs" />
     <Compile Include="Assets\Scripts\Items\coinRotate.cs" />
+    <Compile Include="Assets\Scripts\Items\goalItemInteraction.cs" />
+    <Compile Include="Assets\Scripts\Items\itemPlacementScript.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\collectCollision.cs" />
+    <Compile Include="Assets\Scripts\reset.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Reflective\psx-unlit-add.shader" />
