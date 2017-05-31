@@ -16,6 +16,12 @@ public class coinUpdate : MonoBehaviour {
 		lastCount = 0;
 	}
 
+    public void resetCount()
+    {
+        lastCount = 0;
+        txt.text = "0/" + coinsInLevel.ToString();
+    }
+
 	public void collectCoin () {
 		int coinCount = scoreSource.GetComponent<collectCollision> ().getCoinCount();
 		if (coinCount != lastCount) {

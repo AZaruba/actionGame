@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class goalItemInteraction : MonoBehaviour {
+
+    public string success;
+    public string failure;
+    private int playerMask = 1 << 10;
 	
-	void OnDestroy() {
-		GameObject scores = GameObject.FindGameObjectWithTag ("metrics");
-		int maxScore = scores.GetComponent<coinUpdate>().coinsInLevel;
+	public void nearItem()
+    {
+        // if there's a character near...
+        if (Physics.OverlapSphere(transform.position, 4.0f, playerMask).Length > 0)
+        {
 
-		GameObject player = GameObject.FindGameObjectWithTag ("Player");
-		int currScore = player.GetComponent<collectCollision> ().getCoinCount ();
-
-		if (currScore == maxScore) {
-			// player wins!
-		} else {
-			// let the player know what they need to do
-		}
-	}
+        }
+    }
 }

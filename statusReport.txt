@@ -10,11 +10,10 @@ Accomplishments:
 
 To-Do (5/29-6/02):
   - Figure out good lighting so the gems are readable in low resolution
-  - Split up collision detection into a single script
-    - This MAY not work, given the jumpy mess it was when I tried it
-  - Implement some state change (i.e. attacking)
+   - Implement some state change (i.e. attacking)
     - Reflect the state change via some visual indicator (texture change?)
   - Start building a real level! (blender)
+  - Display coin text over the "Goal Item" like Crash Bandicoot
 
 Stretch Goal:
   - Add some form of heads-up UI (DONE!!!!)

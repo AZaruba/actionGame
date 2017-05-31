@@ -35,4 +35,9 @@ public class collectCollision : MonoBehaviour {
 			scores.GetComponent<coinUpdate> ().collectCoin ();
         }
     }
+
+    public void goalItemCollision()
+    {
+
+    }
 }
