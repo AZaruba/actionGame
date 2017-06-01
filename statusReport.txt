@@ -7,13 +7,19 @@ Accomplishments:
   - on "death" everything resets back to one!
   
   - Two gem models made and successfully imported
+  - We now have a jiggy/star item that can only be collected after collecting all gems
+  - Double jumping (Spyro-esque flutter) implemented
+  - Gravity tweaked
+  - Lighting solution found
+    - unfortuantely the PSX shader doesn't play nicely with lighting
+    - We will either figure this out later or scrap doing the shaky polygons :(
 
 To-Do (5/29-6/02):
-  - Figure out good lighting so the gems are readable in low resolution
+  - Figure out good lighting so the gems are readable in low resolution (Done, sadly!)
    - Implement some state change (i.e. attacking)
     - Reflect the state change via some visual indicator (texture change?)
   - Start building a real level! (blender)
-  - Display coin text over the "Goal Item" like Crash Bandicoot
+  - Display coin text over the "Goal Item" like Crash Bandicoot (Done!)
 
 Stretch Goal:
   - Add some form of heads-up UI (DONE!!!!)

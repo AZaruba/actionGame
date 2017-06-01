@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public float walkSpeed;
 	public float jumpSpeed;
+    public float doubleJumpSpeed;
 	public float dashSpeed;
 	public float gravity;
 	public float terminalVelocity;
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 	private bool falling;
     private bool attacking;
 	private bool dashing;
+    private bool doubleJump;
 
     private RaycastHit groundOut; // gets information for objects below the player
     private float colliderX;
@@ -27,16 +29,21 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 downRay = new Vector3(0, -1, 0); // the ray casting downward in global space
     private int envMask = 1 << 9;
 
+    private collectCollision collectCol;
+
 	// Use this for initialization
 	void Start () {
         mainCam = Camera.main;
         grounded = false;
         attacking = false;
 		dashing = false;
+        doubleJump = false;
         Vector3 colliderInfo = GetComponent<Collider>().bounds.size;
         colliderX = colliderInfo.x / 2;
         colliderY = colliderInfo.y / 2;
         colliderZ = colliderInfo.z / 2;
+
+        collectCol = this.gameObject.GetComponent<collectCollision>();
     }
 
     Vector3 walkInput()
@@ -73,11 +80,13 @@ public class PlayerMovement : MonoBehaviour {
 			currentJumpSpeed = 0;
 			grounded = true;
 			falling = false;
-		}
+            doubleJump = false;
+        }
 		if (grounded && !Physics.Raycast(transform.position, downRay, 0.1f + colliderY)) {
 			grounded = false;
 			falling = true;
-			currentJumpSpeed = 0;
+            doubleJump = false;
+            currentJumpSpeed = 0;
 		}
 
 		if (currentPosition.y < -5.0f) {
@@ -86,6 +95,7 @@ public class PlayerMovement : MonoBehaviour {
 			currentJumpSpeed = 0;
 			grounded = true;
 			falling = false;
+            doubleJump = false;
 			GetComponent<reset> ().backToOne ();
 		}
 
@@ -113,7 +123,12 @@ public class PlayerMovement : MonoBehaviour {
 			grounded = false;
 
 		}
-		if ((Input.GetKeyDown (KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton14))&& !attacking)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton13)) && !grounded && falling && !doubleJump && !attacking)
+        {
+            currentJumpSpeed = doubleJumpSpeed;
+            doubleJump = true;
+        }
+            if ((Input.GetKeyDown (KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton14))&& !attacking)
         {
             attacking = true;
             transform.Rotate(45, 0, 0);
@@ -125,10 +140,11 @@ public class PlayerMovement : MonoBehaviour {
 		transform.position += jumpResult;
         mainCam.transform.position += jumpResult;
 
-        this.gameObject.GetComponent<collectCollision>().coinCollision();
+        collectCol.coinCollision();
+        collectCol.goalItemCollision();
 
 
-		if (Input.GetKey (KeyCode.Escape))
+        if (Input.GetKey (KeyCode.Escape))
 			Application.Quit ();
     }
 }
