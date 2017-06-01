@@ -117,13 +117,13 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			transform.position += walkInput();
         }
-		if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton13)) && grounded && !attacking)
+		if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0)) && grounded && !attacking)
 		{
 			currentJumpSpeed = jumpSpeed;
 			grounded = false;
 
 		}
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton13)) && !grounded && falling && !doubleJump && !attacking)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0)) && !grounded && falling && !doubleJump && !attacking)
         {
             currentJumpSpeed = doubleJumpSpeed;
             doubleJump = true;

@@ -12,6 +12,11 @@ public class itemPlacementScript : MonoBehaviour {
 
 	private GameObject[] coinList = new GameObject[5];
 
+    public int getNumCoins()
+    {
+        return coinList.Length;
+    }
+
 	/*
 	 * This script simply initializes positions for al the coins in a given level
 	 */

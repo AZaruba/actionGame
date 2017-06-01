@@ -27,7 +27,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         transform.LookAt(player.transform.position);
-        transform.RotateAround(player.transform.position, Vector3.up, Input.GetAxis("RHorizontal") * xSensitivity);
-        transform.RotateAround(player.transform.position, transform.forward, Input.GetAxis("RVertical") * ySensitivity);
+        transform.RotateAround(player.transform.position, Vector3.up, Input.GetAxis("RHorizontal") * xSensitivity * Time.deltaTime);
+        transform.RotateAround(player.transform.position, transform.forward, Input.GetAxis("RVertical") * ySensitivity * Time.deltaTime);
     }    
 }

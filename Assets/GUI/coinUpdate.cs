@@ -12,6 +12,7 @@ public class coinUpdate : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        coinsInLevel = GameObject.FindGameObjectWithTag("coinGen").GetComponent<itemPlacementScript>().getNumCoins();
 		txt.text = "0/" + coinsInLevel.ToString();
 		lastCount = 0;
 	}
