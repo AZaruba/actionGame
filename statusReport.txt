@@ -1,5 +1,4 @@
 Status Report: 6/1/17
-
 Accomplishments:
   - Two gem models made and successfully imported
   - We now have a jiggy/star item that can only be collected after collecting all gems
