@@ -11,6 +11,7 @@ Accomplishments:
   - Fixed XInput issues on PC
   - Added a more interesting font!
   - Added elegant solution to the coin counter
+  - Janky Wall collision!
 
 To-Do (5/29-6/02):
   - Figure out good lighting so the gems are readable in low resolution (Done, sadly!)

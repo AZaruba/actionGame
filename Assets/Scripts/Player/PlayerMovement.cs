@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool doubleJump;
 
     private RaycastHit groundOut; // gets information for objects below the player
+    private RaycastHit wallOut; // checks for walls
     private float colliderX;
     private float colliderY;
     private float colliderZ;
@@ -46,6 +47,14 @@ public class PlayerMovement : MonoBehaviour {
         collectCol = this.gameObject.GetComponent<collectCollision>();
     }
 
+    Vector3 wallNormal(Vector3 direction)
+    {
+        if (Physics.Raycast(transform.position, direction, out wallOut, 0.7f, envMask))
+            return wallOut.normal;
+        else
+            return new Vector3(0, 0, 0);
+    }
+
     Vector3 walkInput()
     {
 
@@ -61,6 +70,11 @@ public class PlayerMovement : MonoBehaviour {
         //cameraDirection.Normalize();
 
         direction *= walkSpeed * Time.deltaTime;
+        if (Physics.Raycast(transform.position, direction, out wallOut, 0.2f, envMask))
+        {
+            direction.x = 0;
+            direction.z = 0;
+        }
 		mainCam.transform.position += direction;
 		transform.rotation = Quaternion.LookRotation(direction);
         return direction;

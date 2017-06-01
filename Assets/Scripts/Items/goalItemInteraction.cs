@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class goalItemInteraction : MonoBehaviour {
 
-    public string success;
-    public string failure;
     private int playerMask = 1 << 10;
     private bool playerNear;
 
@@ -14,6 +12,7 @@ public class goalItemInteraction : MonoBehaviour {
     private void Start()
     {
         playerNear = false;
+        scoreText.color = Color.red;
     }
 
 	void Update()

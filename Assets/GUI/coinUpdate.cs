@@ -29,5 +29,10 @@ public class coinUpdate : MonoBehaviour {
 			txt.GetComponent<UnityEngine.UI.Text> ().text = coinCount.ToString() + "/" + coinsInLevel.ToString();
 			lastCount = coinCount;
 		}
+        // change color of goal item text
+        if (coinCount == coinsInLevel)
+        {
+            GameObject.FindGameObjectWithTag("goalEntity").GetComponent<goalItemInteraction>().scoreText.color = Color.white;
+        }
 	}
 }

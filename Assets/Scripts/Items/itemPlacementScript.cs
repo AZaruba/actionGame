@@ -8,9 +8,9 @@ public class itemPlacementScript : MonoBehaviour {
 
 	private Vector3[] coinPositionList = new [] {new Vector3(2,2,12), new Vector3(2,2,16), 
 		                                         new Vector3(2,2,20), new Vector3(2,2,24),
-                                                 new Vector3(-2,2,38)};
+                                                 new Vector3(-2,2,38), new Vector3(-2,5.5f,10)};
 
-	private GameObject[] coinList = new GameObject[5];
+	private GameObject[] coinList = new GameObject[6];
 
     public int getNumCoins()
     {
