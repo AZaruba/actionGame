@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         mainCam = Camera.main;
-        grounded = false;
+        grounded = true;
         attacking = false;
 		dashing = false;
         doubleJump = false;
@@ -69,11 +69,13 @@ public class PlayerMovement : MonoBehaviour {
 		direction.x = -cameraDirection.z * Mathf.Cos (rotationDegree) + cameraDirection.x * Mathf.Sin (rotationDegree);
 		direction.z = cameraDirection.z * Mathf.Sin (rotationDegree) + cameraDirection.x * Mathf.Cos (rotationDegree);
 
-        //direction.Normalize();
-        //cameraDirection.Normalize();
+        direction.Normalize();
+        cameraDirection.Normalize();
+
+		// do whatever wall collision we can do (gotta figure this out! Vector addition does not work)
 
         direction *= currentWalkSpeed * Time.deltaTime;
-        if (Physics.Raycast(transform.position, direction, out wallOut, 0.5f, envMask))
+        if (Physics.Raycast(transform.position, direction, out wallOut, 0.7f, envMask))
         {
             direction.x = 0;
             direction.z = 0;

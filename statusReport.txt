@@ -1,30 +1,14 @@
-Status Report: 6/2/17
+Status Report: 6/3/17
 Accomplishments:
-  - Two gem models made and successfully imported
-  - We now have a jiggy/star item that can only be collected after collecting all gems
-  - Double jumping (Spyro-esque flutter) implemented
-  - Gravity tweaked
-  - Lighting solution found
-    - unfortuantely the PSX shader doesn't play nicely with lighting
-    - We will either figure this out later or scrap doing the shaky polygons :(
-  - Solved modeling issues (normals, rotation, and scaling)
-  - Fixed XInput issues on PC
-  - Added a more interesting font!
-  - Added elegant solution to the coin counter
-  - Janky Wall collision!
-  - Ceiling collision works with falling!
-  - Dashing implemented! (uses Coroutines)
-  - Gravity better normalized (hopefully finally done!)
+  - Text only appears when collecting a gem, fades out SORT OF
 
-To-Do (5/29-6/02):
-  - Figure out good lighting so the gems are readable in low resolution (Done, sadly!)
-   - Implement some state change (i.e. attacking) (Done!)
-    - Reflect the state change via some visual indicator (texture change?)
-  - Start building a real level! (blender) (Done, but not committed yet)
-  - Display coin text over the "Goal Item" like Crash Bandicoot (Done!)
+To-Do (6/03-6/09):
+  - Fix fading out (make it start over instead of sort of re-fizzling out)
+  - Continue building a level (The coral forest!)
+  - Implement tracking of multiple gem types
+  - Experiment with scene changes/a main menu
 
-Stretch Goal:
-  - Add some form of heads-up UI (DONE!!!!)
+Stretch Goals:
   - Start making a hero
-  - Dodging (Techincally done!)
   - Implement an enemy
+  - Better wall collision
