@@ -12,7 +12,7 @@ Accomplishments:
   - Added a more interesting font!
   - Added elegant solution to the coin counter
   - Janky Wall collision!
-  - Ceiling collision works but character does not FALL (merely gets stuck)
+  - Ceiling collision works with falling!
   - Dashing implemented! (uses Coroutines)
   - Gravity better normalized (hopefully finally done!)
 

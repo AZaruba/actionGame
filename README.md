@@ -8,7 +8,7 @@ Dowload the folder "macBuild.zip" file to get the actiontest.app file, which is 
 
 ## Windows Build
 
-Download the "pcBuild.zip" file to get the data folder and .exe for actionTest. Currently outdated as well!
+Download the "pcBuild.zip" file to get the data folder and .exe for actionTest.
 
 ## Controls
 
@@ -19,9 +19,13 @@ Jump - Space
 
 Rotate Camera - J and L
 
+Dash - Left Shift
+
 Xbox 360 Controller:
 Move - Left Analog
 
 Jump - A
 
 Rotate camera - Right Analog
+
+Dash - Unmapped (will be X)

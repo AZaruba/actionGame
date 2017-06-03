@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour {
 			falling = true;
 		}
 
-		if (Physics.Raycast(transform.position, upRay, 0.2f, envMask)) {
+		if (Physics.Raycast(transform.position, upRay, 0.2f, envMask) && !falling) {
 			falling = true;
 			currentJumpSpeed = 0;
 		}
