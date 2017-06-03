@@ -1,4 +1,4 @@
-Status Report: 6/1/17
+Status Report: 6/2/17
 Accomplishments:
   - Two gem models made and successfully imported
   - We now have a jiggy/star item that can only be collected after collecting all gems
@@ -12,16 +12,19 @@ Accomplishments:
   - Added a more interesting font!
   - Added elegant solution to the coin counter
   - Janky Wall collision!
+  - Ceiling collision works but character does not FALL (merely gets stuck)
+  - Dashing implemented! (uses Coroutines)
+  - Gravity better normalized (hopefully finally done!)
 
 To-Do (5/29-6/02):
   - Figure out good lighting so the gems are readable in low resolution (Done, sadly!)
-   - Implement some state change (i.e. attacking)
+   - Implement some state change (i.e. attacking) (Done!)
     - Reflect the state change via some visual indicator (texture change?)
-  - Start building a real level! (blender)
+  - Start building a real level! (blender) (Done, but not committed yet)
   - Display coin text over the "Goal Item" like Crash Bandicoot (Done!)
 
 Stretch Goal:
   - Add some form of heads-up UI (DONE!!!!)
   - Start making a hero
-  - Dodging
+  - Dodging (Techincally done!)
   - Implement an enemy

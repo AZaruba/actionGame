@@ -10,10 +10,11 @@ public class PlayerMovement : MonoBehaviour {
 	public float dashSpeed;
 	public float gravity;
 	public float terminalVelocity;
-	public float dashDistance;
+	public float dashTime;
 
     private Camera mainCam;
 	private float currentJumpSpeed;
+	private float currentWalkSpeed;
 
 	private bool grounded;
 	private bool falling;
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
     private float colliderZ;
 
 	private Vector3 downRay = new Vector3(0, -1, 0); // the ray casting downward in global space
+	private Vector3 upRay = new Vector3(0, 1, 0);
     private int envMask = 1 << 9;
 
     private collectCollision collectCol;
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour {
         colliderZ = colliderInfo.z / 2;
 
         collectCol = this.gameObject.GetComponent<collectCollision>();
+		currentWalkSpeed = walkSpeed;
     }
 
     Vector3 wallNormal(Vector3 direction)
@@ -69,8 +72,8 @@ public class PlayerMovement : MonoBehaviour {
         //direction.Normalize();
         //cameraDirection.Normalize();
 
-        direction *= walkSpeed * Time.deltaTime;
-        if (Physics.Raycast(transform.position, direction, out wallOut, 0.2f, envMask))
+        direction *= currentWalkSpeed * Time.deltaTime;
+        if (Physics.Raycast(transform.position, direction, out wallOut, 0.5f, envMask))
         {
             direction.x = 0;
             direction.z = 0;
@@ -87,7 +90,14 @@ public class PlayerMovement : MonoBehaviour {
 		if (currentJumpSpeed < 0 && !grounded) {
 			falling = true;
 		}
-		if (Physics.Raycast(transform.position, downRay, out groundOut, 0.2f, envMask) && !grounded && falling) {
+
+		if (Physics.Raycast(transform.position, upRay, 0.2f, envMask)) {
+			falling = true;
+			currentJumpSpeed = 0;
+		}
+
+		// collided with ground
+		if (Physics.Raycast(transform.position, downRay, out groundOut, 0.7f, envMask) && !grounded && falling) {
             Vector3 currentCameraPos = mainCam.transform.position;
 			transform.position = new Vector3 (groundOut.point.x, groundOut.point.y + colliderY, groundOut.point.z);
             mainCam.transform.position = new Vector3(currentCameraPos.x, groundOut.point.y + colliderY + 2, currentCameraPos.z);
@@ -95,6 +105,10 @@ public class PlayerMovement : MonoBehaviour {
 			grounded = true;
 			falling = false;
             doubleJump = false;
+			if (dashing) {
+				currentWalkSpeed = walkSpeed;
+				dashing = false;
+			}
         }
 		if (grounded && !Physics.Raycast(transform.position, downRay, 0.1f + colliderY)) {
 			grounded = false;
@@ -110,19 +124,15 @@ public class PlayerMovement : MonoBehaviour {
 			grounded = true;
 			falling = false;
             doubleJump = false;
+			if (dashing) {
+				currentWalkSpeed = walkSpeed;
+				dashing = false;
+			}
 			GetComponent<reset> ().backToOne ();
 		}
 
-		return new Vector3 (0, currentJumpSpeed, 0);
+		return new Vector3 (0, currentJumpSpeed * Time.deltaTime, 0);
 
-	}
-
-	void dashInput(Vector3 direction, float delta) {
-		if (delta == dashDistance) {
-			dashing = false;
-		} else {
-
-		}
 	}
 
 	// Update is called once per frame
@@ -142,7 +152,7 @@ public class PlayerMovement : MonoBehaviour {
             currentJumpSpeed = doubleJumpSpeed;
             doubleJump = true;
         }
-            if ((Input.GetKeyDown (KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton14))&& !attacking)
+        if ((Input.GetKeyDown (KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton14))&& !attacking)
         {
             attacking = true;
             transform.Rotate(45, 0, 0);
@@ -150,6 +160,11 @@ public class PlayerMovement : MonoBehaviour {
             attacking = false;
 
         }
+		if (Input.GetKeyDown (KeyCode.LeftShift) && grounded)
+		{
+			StartCoroutine (dash ());
+		}
+
         Vector3 jumpResult = jumpInput(transform.position);
 		transform.position += jumpResult;
         mainCam.transform.position += jumpResult;
@@ -161,4 +176,21 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKey (KeyCode.Escape))
 			Application.Quit ();
     }
+
+	IEnumerator dash()
+	{
+		dashing = true;
+		float time = 0;
+		currentWalkSpeed = dashSpeed;
+		while (time < dashTime)
+		{
+			time += Time.deltaTime;
+			yield return null;
+		}
+		if (grounded) {
+			currentWalkSpeed = walkSpeed;
+			dashing = false;
+		}
+		yield return null;
+	}
 }

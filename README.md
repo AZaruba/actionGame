@@ -4,20 +4,24 @@ An action game currently just a test of moving a character and camera around a f
 
 ## OS X Build
 
-Dowload the folder "actionTest.app" to get the OS X build of the game. This is the app "file" for the game (GitHub treats it as a folder for obvious reasons :))
+Dowload the folder "macBuild.zip" file to get the actiontest.app file, which is a (currently outdated) build of the Mac version.
 
 ## Windows Build
 
-Coming Soon!
+Download the "pcBuild.zip" file to get the data folder and .exe for actionTest. Currently outdated as well!
 
 ## Controls
 
 KB/M: 
 Move - WASD
+
 Jump - Space
+
 Rotate Camera - J and L
 
 Xbox 360 Controller:
 Move - Left Analog
+
 Jump - A
-Rotate camera - Right Analog (this may be broken on the OS X build, as I've been testing using my trusty DualShock 3!)
+
+Rotate camera - Right Analog
