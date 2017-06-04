@@ -3,12 +3,13 @@ Accomplishments:
   - Text only appears when collecting a gem, fades out correctly now!
   - Code now supports multiple scores being tracked (so multiple gem types can be messed with!)
   - "Look Rotation is Zero" spam fixed
+  - Menu screen made, methodology in mind but still WIP
 
 To-Do (6/03-6/09):
   - Fix fading out (make it start over instead of sort of re-fizzling out) DONE!
   - Continue building a level (The coral forest!)
   - Implement tracking of multiple gem types DONE! (Potentially)
-  - Experiment with scene changes/a main menu
+  - Experiment with scene changes/a main menu (in progress)
 
 Stretch Goals:
   - Start making a hero
