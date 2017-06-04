@@ -1,9 +1,9 @@
-Status Report: 6/3/17
+Status Report: 6/4/17
 Accomplishments:
-  - Text only appears when collecting a gem, fades out SORT OF
+  - Text only appears when collecting a gem, fades out correctly now!
 
 To-Do (6/03-6/09):
-  - Fix fading out (make it start over instead of sort of re-fizzling out)
+  - Fix fading out (make it start over instead of sort of re-fizzling out) DONE!
   - Continue building a level (The coral forest!)
   - Implement tracking of multiple gem types
   - Experiment with scene changes/a main menu

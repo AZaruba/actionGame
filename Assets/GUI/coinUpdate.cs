@@ -12,6 +12,8 @@ public class coinUpdate : MonoBehaviour {
 
 	public float stayTime;
 	public float fadeTime;
+    Coroutine fadeReference;
+    bool displayingScore;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +21,7 @@ public class coinUpdate : MonoBehaviour {
 		txt.text = "0/" + coinsInLevel.ToString();
 		txt.color = new Color (Color.blue.r, Color.blue.g, Color.blue.b, 0);
 		lastCount = 0;
+        displayingScore = false;
 	}
 
     public void resetCount()
@@ -28,6 +31,7 @@ public class coinUpdate : MonoBehaviour {
     }
 
 	IEnumerator fadeText() {
+        displayingScore = true;
 		float time = 0;
 		float alphaTime = 0;
 		while (time < (fadeTime + stayTime)) {
@@ -38,12 +42,12 @@ public class coinUpdate : MonoBehaviour {
 			}
 			yield return null;
 		}
-		yield return null;
+        displayingScore = false;
+        yield return null;
 	}
 
 	public void collectCoin () {
-		
-		int coinCount = scoreSource.GetComponent<collectCollision> ().getCoinCount();
+        int coinCount = scoreSource.GetComponent<collectCollision> ().getCoinCount();
 		if (coinCount != lastCount) {
 			txt.GetComponent<UnityEngine.UI.Text> ().text = coinCount.ToString() + "/" + coinsInLevel.ToString();
 			lastCount = coinCount;
@@ -53,8 +57,11 @@ public class coinUpdate : MonoBehaviour {
         {
             GameObject.FindGameObjectWithTag("goalEntity").GetComponent<goalItemInteraction>().scoreText.color = Color.white;
         }
-		StopCoroutine (fadeText ());
-		txt.color = new Color(Color.blue.r, Color.blue.g, Color.blue.b, 1);
-		StartCoroutine (fadeText ());
+        if (displayingScore)
+        {
+            StopCoroutine(fadeReference);
+        }
+        txt.color = new Color(Color.blue.r, Color.blue.g, Color.blue.b, 1);
+        fadeReference = StartCoroutine (fadeText ());
 	}
 }
