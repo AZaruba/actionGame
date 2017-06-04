@@ -80,8 +80,12 @@ public class PlayerMovement : MonoBehaviour {
             direction.x = 0;
             direction.z = 0;
         }
+        else
+        {
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
 		mainCam.transform.position += direction;
-		transform.rotation = Quaternion.LookRotation(direction);
+
         return direction;
     }
 
@@ -154,15 +158,7 @@ public class PlayerMovement : MonoBehaviour {
             currentJumpSpeed = doubleJumpSpeed;
             doubleJump = true;
         }
-        if ((Input.GetKeyDown (KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton14))&& !attacking)
-        {
-            attacking = true;
-            transform.Rotate(45, 0, 0);
-            transform.Rotate(-45, 0, 0);
-            attacking = false;
-
-        }
-		if (Input.GetKeyDown (KeyCode.LeftShift) && grounded)
+		if ((Input.GetKeyDown (KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton2)) && grounded)
 		{
 			StartCoroutine (dash ());
 		}

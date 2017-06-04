@@ -6,13 +6,20 @@ public class goalItemInteraction : MonoBehaviour {
 
     private int playerMask = 1 << 10;
     private bool playerNear;
+    private coinUpdate coinMetric;
 
     public TextMesh scoreText;
+    public string metricName;
 
     private void Start()
     {
         playerNear = false;
         scoreText.color = Color.red;
+        foreach (GameObject metric in GameObject.FindGameObjectsWithTag("metrics"))
+        {
+            if (metric.name.Equals(metricName))
+                coinMetric = metric.GetComponent<coinUpdate>();
+        }
     }
 
 	void Update()
@@ -24,7 +31,7 @@ public class goalItemInteraction : MonoBehaviour {
         {
             playerNear = true;
             // overlay text
-            scoreText.text = GameObject.FindGameObjectWithTag("metrics").GetComponent<coinUpdate>().txt.text;
+            scoreText.text = coinMetric.txt.text;
 
         } else if (playerNear)
         {
