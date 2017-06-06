@@ -29,3 +29,8 @@ Jump - A
 Rotate camera - Right Analog
 
 Dash - X
+
+## Menu controls
+Escape - Exits the game (can be used in game or in menu)
+W/S or Right Analog - navigate menu
+Space or A - Confirm

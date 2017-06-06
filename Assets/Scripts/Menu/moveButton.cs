@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class moveButton : MonoBehaviour {
 
@@ -27,5 +28,15 @@ public class moveButton : MonoBehaviour {
 			index--;
 			thisTransform.anchoredPosition = new Vector2 (horizPosition, vertPositions [index]);
 		}
+
+		if (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.JoystickButton0)) {
+			if (index == 0) {
+				SceneManager.LoadScene ("firstScene", LoadSceneMode.Single);
+			} else {
+				Application.Quit ();
+			}
+		}
+		if (Input.GetKey (KeyCode.Escape))
+			Application.Quit ();
 	}
 }

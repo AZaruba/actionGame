@@ -3,16 +3,24 @@ Accomplishments:
   - Text only appears when collecting a gem, fades out correctly now!
   - Code now supports multiple scores being tracked (so multiple gem types can be messed with!)
   - "Look Rotation is Zero" spam fixed
-  - Menu screen made, methodology in mind but still WIP
+  - Menu screen made, methodology in mind but a hacky solution implemented
 
 To-Do (6/03-6/09):
   - Fix fading out (make it start over instead of sort of re-fizzling out) DONE!
   - Continue building a level (The coral forest!)
   - Implement tracking of multiple gem types DONE! (Potentially)
-  - Experiment with scene changes/a main menu (in progress)
+  - Experiment with scene changes/a main menu DONE!
 
 Stretch Goals:
   - Start making a hero
   - Implement an enemy
   - Better wall collision
+     - To keep this idea in mind:
+       We want the x and z components to the player movement, normalized and
+       the same for the normal of whatever wall we collide with (find an elegant
+       collision solution later). From there we want to subtract the value of
+       the normalized wall vector with the player vector to only cancel out
+       the movement in that direction (so you can still "slide" along walls)
+
+     - Try and poke holes in this idea before implementing?
   - SLOPES!
