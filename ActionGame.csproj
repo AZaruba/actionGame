@@ -90,6 +90,8 @@
     <Compile Include="Assets\Scripts\Items\coinRotate.cs" />
     <Compile Include="Assets\Scripts\Items\goalItemInteraction.cs" />
     <Compile Include="Assets\Scripts\Items\itemPlacementScript.cs" />
+    <Compile Include="Assets\Scripts\Menu\menuScript.cs" />
+    <Compile Include="Assets\Scripts\Menu\moveButton.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\collectCollision.cs" />
     <Compile Include="Assets\Scripts\reset.cs" />

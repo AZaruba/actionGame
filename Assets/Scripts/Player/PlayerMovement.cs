@@ -74,17 +74,20 @@ public class PlayerMovement : MonoBehaviour {
 
 		// do whatever wall collision we can do (gotta figure this out! Vector addition does not work)
 
-        direction *= currentWalkSpeed * Time.deltaTime;
+
+        // if we collide with a wall
         if (Physics.Raycast(transform.position, direction, out wallOut, 0.7f, envMask))
         {
-            direction.x = 0;
-            direction.z = 0;
+            direction.x += wallOut.normal.normalized.x;
+            direction.z +=  wallOut.normal.normalized.z;
+            direction *= currentWalkSpeed * Time.deltaTime;
         }
         else
         {
             transform.rotation = Quaternion.LookRotation(direction);
+            direction *= currentWalkSpeed * Time.deltaTime;
         }
-		mainCam.transform.position += direction;
+        mainCam.transform.position += direction;
 
         return direction;
     }
@@ -153,7 +156,7 @@ public class PlayerMovement : MonoBehaviour {
 			grounded = false;
 
 		}
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0)) && !grounded && falling && !doubleJump && !attacking)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0)) && !grounded && currentJumpSpeed < doubleJumpSpeed && !doubleJump && !attacking)
         {
             currentJumpSpeed = doubleJumpSpeed;
             doubleJump = true;
