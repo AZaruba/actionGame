@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private RaycastHit groundOut; // gets information for objects below the player
     private RaycastHit wallOut; // checks for walls
+	private RaycastHit slopeOut; // checks/compensates for slopes
     private float colliderX;
     private float colliderY;
     private float colliderZ;
@@ -72,8 +73,18 @@ public class PlayerMovement : MonoBehaviour {
         direction.Normalize();
         cameraDirection.Normalize();
 
-		// do whatever wall collision we can do (gotta figure this out! Vector addition does not work)
+		// SLOPES!
+		Vector3 slopeVector = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+		// we need an origin that is equivalent to the BACK of the PC to check for ground
 
+		if (grounded && Physics.Raycast(slopeVector, direction, out slopeOut, 0.5f, envMask)) {
+			direction.y = slopeOut.point.y; // need to make sure this doesn't trigger when on flat ground
+		}
+
+		//slope going down
+		//if (Physics.Raycast (transform.position, direction * -1, out slopeOut, envMask)) {
+
+		//}
 
         // if we collide with a wall
         if (Physics.Raycast(transform.position, direction, out wallOut, 0.7f, envMask))
@@ -84,7 +95,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         else
         {
-            transform.rotation = Quaternion.LookRotation(direction);
+			transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             direction *= currentWalkSpeed * Time.deltaTime;
         }
         mainCam.transform.position += direction;

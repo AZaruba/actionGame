@@ -1,4 +1,4 @@
-Status Report: 6/4/17
+Status Report: 6/8/17
 Accomplishments:
   - Text only appears when collecting a gem, fades out correctly now!
   - Code now supports multiple scores being tracked (so multiple gem types can be messed with!)
@@ -6,6 +6,11 @@ Accomplishments:
   - Menu screen made, methodology in mind but a hacky solution implemented
   - Wall collision plays nicely now! The below solution works
     - still need better way to hitbox the player, as Mr. Boxington can clip into the walls slightly
+    - weird "move through wall" quirk happening sometimes, couldn't replicate
+  - Moving up slopes sort of works!
+    - breaks after a certain time, wondering how to fix...
+    - need to make sure we can't just meld into the bottom of things
+
 To-Do (6/03-6/09):
   - Fix fading out (make it start over instead of sort of re-fizzling out) DONE!
   - Continue building a level (The coral forest!)
@@ -16,4 +21,4 @@ Stretch Goals:
   - Start making a hero
   - Implement an enemy
   - Better wall collision DONE! (barring some quirks found later)
-  - SLOPES!
+  - SLOPES! (WIP!)
