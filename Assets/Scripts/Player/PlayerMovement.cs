@@ -59,6 +59,22 @@ public class PlayerMovement : MonoBehaviour {
             return new Vector3(0, 0, 0);
     }
 
+	Vector3 detectSlope() {
+		/* this vector should have the same origin as the wall one (as if there's anything "forward"
+		   that collides with it, that would be considered a wall! */
+		if (Physics.Raycast (transform.position, downRay, out slopeOut, colliderY,  envMask) && grounded) {
+			mainCam.transform.position = new Vector3 (mainCam.transform.position.x, slopeOut.point.y + colliderY + 2, mainCam.transform.position.z);
+			return new Vector3 (transform.position.x, slopeOut.point.y + colliderY, transform.position.z);
+		}
+		// Downward sloping (we use the distance for this one (currently 0.4) to set the angle limit)
+		Vector3 bottomVec = new Vector3 (transform.position.x, transform.position.y - colliderY, transform.position.z);
+		if (Physics.Raycast (bottomVec, downRay, out slopeOut, 0.4f, envMask) && grounded) {
+			mainCam.transform.position = new Vector3 (mainCam.transform.position.x, slopeOut.point.y + colliderY + 2, mainCam.transform.position.z);
+			return new Vector3 (transform.position.x, slopeOut.point.y + colliderY, transform.position.z);
+		}
+		return transform.position;
+	}
+
     Vector3 walkInput()
     {
 
@@ -73,20 +89,8 @@ public class PlayerMovement : MonoBehaviour {
         direction.Normalize();
         cameraDirection.Normalize();
 
-		// SLOPES!
-		Vector3 slopeVector = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-		// we need an origin that is equivalent to the BACK of the PC to check for ground
-
-		if (grounded && Physics.Raycast(slopeVector, direction, out slopeOut, 0.5f, envMask)) {
-			direction.y = slopeOut.point.y; // need to make sure this doesn't trigger when on flat ground
-		}
-
-		//slope going down
-		//if (Physics.Raycast (transform.position, direction * -1, out slopeOut, envMask)) {
-
-		//}
-
         // if we collide with a wall
+		// NOTE: we can hack in the valid slope angles here by moving the origin of this raycast
         if (Physics.Raycast(transform.position, direction, out wallOut, 0.7f, envMask))
         {
             direction.x += wallOut.normal.normalized.x;
@@ -160,6 +164,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
 		{
 			transform.position += walkInput();
+			transform.position = detectSlope();
         }
 		if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0)) && grounded && !attacking)
 		{

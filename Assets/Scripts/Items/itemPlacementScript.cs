@@ -6,9 +6,9 @@ public class itemPlacementScript : MonoBehaviour {
 
 	public GameObject coinPrefab;
 
-	private Vector3[] coinPositionList = new [] {new Vector3(2,2,12), new Vector3(2,2,16), 
-		                                         new Vector3(2,2,20), new Vector3(2,2,24),
-                                                 new Vector3(-2,2,38), new Vector3(-2,5.5f,10)};
+	private Vector3[] coinPositionList = new [] {new Vector3(2,0.8f,12), new Vector3(2,1.3f,16), 
+		                                         new Vector3(2,1.8f,20), new Vector3(2,2.3f,24),
+                                                 new Vector3(-2,2.8f,38), new Vector3(-2,5.5f,10)};
 
 	private GameObject[] coinList = new GameObject[6];
 
