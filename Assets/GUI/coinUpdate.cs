@@ -57,7 +57,10 @@ public class coinUpdate : MonoBehaviour {
         // change color of goal item text
         if (coinCount == coinsInLevel)
         {
-            GameObject.FindGameObjectWithTag("goalEntity").GetComponent<goalItemInteraction>().scoreText.color = Color.white;
+			foreach (GameObject goalItem in GameObject.FindGameObjectsWithTag("goalEntity")) {
+				if (goalItem.name.Contains("blue"))
+				  goalItem.GetComponent<goalItemInteraction>().scoreText.color = Color.white;
+		    }
         }
         if (displayingScore)
         {

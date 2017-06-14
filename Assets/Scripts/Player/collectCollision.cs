@@ -11,7 +11,8 @@ public class collectCollision : MonoBehaviour {
 	private int layerMask;
     private int goalMask;
 
-	private int coinCount;
+	private int blueCoinCount;
+	private int greenCoinCount;
 
     public string metricName;
 
@@ -19,7 +20,8 @@ public class collectCollision : MonoBehaviour {
 	void Start () {
 		layerMask = 1 << 8;
         goalMask = 1 << 11;
-		coinCount = 0;
+		blueCoinCount = 0;
+		greenCoinCount = 0;
         foreach (GameObject metric in GameObject.FindGameObjectsWithTag("metrics"))
         {
             if (metric.name.Equals("Score"))
@@ -30,11 +32,11 @@ public class collectCollision : MonoBehaviour {
     }
 
 	public int getCoinCount() {
-		return this.coinCount;
+		return this.blueCoinCount;
 	}
 
 	public void setCoinCount(int count) {
-		this.coinCount = count;
+		this.blueCoinCount = count;
 	}
 
     public void coinCollision()
@@ -44,13 +46,13 @@ public class collectCollision : MonoBehaviour {
         {
 			if (hitArray [0].gameObject.name.Contains ("blueGem")) {
 				Destroy (hitArray [0].gameObject);
-				coinCount++;
+				blueCoinCount++;
 
 				blueScore.collectCoin ();
 			}
 			if (hitArray [0].gameObject.name.Contains ("greenGem")) {
 				Destroy (hitArray [0].gameObject);
-				coinCount++;
+				greenCoinCount++;
 
 				greenScore.collectCoin ();
 			}
@@ -60,10 +62,15 @@ public class collectCollision : MonoBehaviour {
     public void goalItemCollision()
     {
         hitArray = Physics.OverlapSphere(transform.position, 1.0f, goalMask);
-        if (hitArray.Length > 0 && blueScore.coinsInLevel == coinCount)
-        {
-            Destroy(hitArray[0].gameObject.GetComponent<goalItemInteraction>().scoreText);
-            Destroy(hitArray[0].gameObject);
-        }
+		if (hitArray.Length > 0) {
+			if (hitArray [0].name.Contains ("blue") && blueScore.coinsInLevel == blueCoinCount) {
+				Destroy (hitArray [0].gameObject.GetComponent<goalItemInteraction> ().scoreText);
+				Destroy (hitArray [0].gameObject);
+			}
+			if (hitArray [0].name.Contains ("green") && greenScore.coinsInLevel == greenCoinCount) {
+				Destroy (hitArray [0].gameObject.GetComponent<goalItemInteraction> ().scoreText);
+				Destroy (hitArray [0].gameObject);
+			}
+		}
     }
 }

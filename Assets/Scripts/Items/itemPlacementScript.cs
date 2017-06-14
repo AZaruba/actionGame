@@ -25,7 +25,6 @@ public class itemPlacementScript : MonoBehaviour {
 			Destroy(coin);
 		
 		for (int i = 0; i < coinList.Length; i++) {
-			Debug.Log ("Generating " + coinPrefab.name);
 			coinList [i] = Object.Instantiate (coinPrefab);
 			coinList [i].transform.position = coinPositionList [i];
 			coinList [i].tag = "gameEntity";
