@@ -3,11 +3,13 @@ Status Report 6/12/17
 Accomplishments:
   - Slopes working provided walls are perpendicular to ground
     - Ideas abound for how to fix this!
+  - In progress: Multiple coin types not quite correctly implemented
 
 To-Do List (6/12-6/19):
   - SLOPE (90% done!!!)
   - Make a real first level
   - Level transitions
+  - Fix multiple coin collection
 
 Stretch Goals:
   - Implement an enemy

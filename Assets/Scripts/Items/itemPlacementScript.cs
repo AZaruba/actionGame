@@ -6,11 +6,11 @@ public class itemPlacementScript : MonoBehaviour {
 
 	public GameObject coinPrefab;
 
-	private Vector3[] coinPositionList = new [] {new Vector3(2,0.8f,12), new Vector3(2,1.3f,16), 
+	public Vector3[] coinPositionList; /* = new [] {new Vector3(2,0.8f,12), new Vector3(2,1.3f,16), 
 		                                         new Vector3(2,1.8f,20), new Vector3(2,2.3f,24),
-                                                 new Vector3(-2,2.8f,38), new Vector3(-2,5.5f,10)};
+                                                 new Vector3(-2,2.8f,38), new Vector3(-2,5.5f,10)}; */
 
-	private GameObject[] coinList = new GameObject[6];
+	private GameObject[] coinList;
 
     public int getNumCoins()
     {
@@ -25,13 +25,15 @@ public class itemPlacementScript : MonoBehaviour {
 			Destroy(coin);
 		
 		for (int i = 0; i < coinList.Length; i++) {
+			Debug.Log ("Generating " + coinPrefab.name);
 			coinList [i] = Object.Instantiate (coinPrefab);
 			coinList [i].transform.position = coinPositionList [i];
 			coinList [i].tag = "gameEntity";
 		}
 	}
 
-	void Start () {
+	void Awake () {
+		coinList = new GameObject[coinPositionList.Length];
 		genCoins ();
 	}
 }

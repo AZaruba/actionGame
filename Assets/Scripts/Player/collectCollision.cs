@@ -6,7 +6,8 @@ public class collectCollision : MonoBehaviour {
 
 	private RaycastHit coinHit;
 	private Collider[] hitArray;
-    private coinUpdate score;
+    private coinUpdate blueScore;
+	private coinUpdate greenScore;
 	private int layerMask;
     private int goalMask;
 
@@ -21,8 +22,10 @@ public class collectCollision : MonoBehaviour {
 		coinCount = 0;
         foreach (GameObject metric in GameObject.FindGameObjectsWithTag("metrics"))
         {
-            if (metric.name.Equals(metricName))
-                score = metric.GetComponent<coinUpdate>();
+            if (metric.name.Equals("Score"))
+                blueScore = metric.GetComponent<coinUpdate>();
+			if (metric.name.Equals ("greenScore"))
+				greenScore = metric.GetComponent<coinUpdate> ();
         }
     }
 
@@ -39,17 +42,25 @@ public class collectCollision : MonoBehaviour {
         hitArray = Physics.OverlapSphere(transform.position, 1.0f, layerMask);
         if (hitArray.Length > 0)
         {
-            Destroy(hitArray[0].gameObject);
-			coinCount++;
+			if (hitArray [0].gameObject.name.Contains ("blueGem")) {
+				Destroy (hitArray [0].gameObject);
+				coinCount++;
 
-			score.collectCoin ();
+				blueScore.collectCoin ();
+			}
+			if (hitArray [0].gameObject.name.Contains ("greenGem")) {
+				Destroy (hitArray [0].gameObject);
+				coinCount++;
+
+				greenScore.collectCoin ();
+			}
         }
     }
 
     public void goalItemCollision()
     {
         hitArray = Physics.OverlapSphere(transform.position, 1.0f, goalMask);
-        if (hitArray.Length > 0 && score.coinsInLevel == coinCount)
+        if (hitArray.Length > 0 && blueScore.coinsInLevel == coinCount)
         {
             Destroy(hitArray[0].gameObject.GetComponent<goalItemInteraction>().scoreText);
             Destroy(hitArray[0].gameObject);

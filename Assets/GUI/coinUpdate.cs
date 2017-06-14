@@ -12,14 +12,16 @@ public class coinUpdate : MonoBehaviour {
 
 	public float stayTime;
 	public float fadeTime;
+	public Color textColor;
+	public string coinGenerator;
     Coroutine fadeReference;
     bool displayingScore;
 
 	// Use this for initialization
 	void Start () {
-        coinsInLevel = GameObject.FindGameObjectWithTag("coinGen").GetComponent<itemPlacementScript>().getNumCoins();
+        coinsInLevel = GameObject.FindGameObjectWithTag(coinGenerator).GetComponent<itemPlacementScript>().getNumCoins();
 		txt.text = "0/" + coinsInLevel.ToString();
-		txt.color = new Color (Color.blue.r, Color.blue.g, Color.blue.b, 0);
+		txt.color = textColor;
 		lastCount = 0;
         displayingScore = false;
 	}
@@ -61,7 +63,7 @@ public class coinUpdate : MonoBehaviour {
         {
             StopCoroutine(fadeReference);
         }
-        txt.color = new Color(Color.blue.r, Color.blue.g, Color.blue.b, 1);
+		txt.color = new Color(textColor.r, textColor.g, textColor.b, 1);
         fadeReference = StartCoroutine (fadeText ());
 	}
 }
