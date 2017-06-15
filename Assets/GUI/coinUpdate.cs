@@ -8,6 +8,7 @@ public class coinUpdate : MonoBehaviour {
 	public Text txt;
 	public GameObject scoreSource;
 	public int coinsInLevel;
+    public string coinColor;
 	private int lastCount;
 
 	public float stayTime;
@@ -49,7 +50,7 @@ public class coinUpdate : MonoBehaviour {
 	}
 
 	public void collectCoin () {
-        int coinCount = scoreSource.GetComponent<collectCollision> ().getCoinCount();
+        int coinCount = scoreSource.GetComponent<collectCollision> ().getCoinCount(coinColor);
 		if (coinCount != lastCount) {
 			txt.GetComponent<UnityEngine.UI.Text> ().text = coinCount.ToString() + "/" + coinsInLevel.ToString();
 			lastCount = coinCount;
@@ -58,9 +59,9 @@ public class coinUpdate : MonoBehaviour {
         if (coinCount == coinsInLevel)
         {
 			foreach (GameObject goalItem in GameObject.FindGameObjectsWithTag("goalEntity")) {
-				if (goalItem.name.Contains("blue"))
+				if (goalItem.name.Contains("blue") || goalItem.name.Contains("green"))
 				  goalItem.GetComponent<goalItemInteraction>().scoreText.color = Color.white;
-		    }
+            }
         }
         if (displayingScore)
         {

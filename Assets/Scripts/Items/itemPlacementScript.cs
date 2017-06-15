@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class itemPlacementScript : MonoBehaviour {
 
+    public string type;
 	public GameObject coinPrefab;
 
 	public Vector3[] coinPositionList; /* = new [] {new Vector3(2,0.8f,12), new Vector3(2,1.3f,16), 
@@ -21,13 +22,15 @@ public class itemPlacementScript : MonoBehaviour {
 	 * This script simply initializes positions for al the coins in a given level
 	 */
 	public void genCoins() {
-		foreach (GameObject coin in GameObject.FindGameObjectsWithTag("gameEntity"))
-			Destroy(coin);
+        foreach (GameObject coin in GameObject.FindGameObjectsWithTag(type+"Coin"))
+        {
+            Destroy(coin);
+        }
 		
 		for (int i = 0; i < coinList.Length; i++) {
 			coinList [i] = Object.Instantiate (coinPrefab);
 			coinList [i].transform.position = coinPositionList [i];
-			coinList [i].tag = "gameEntity";
+            coinList[i].tag = type+"Coin";
 		}
 	}
 

@@ -5,12 +5,15 @@ using UnityEngine;
 public class reset : MonoBehaviour {
 
 	public GameObject player;
-	public GameObject coinGen;
+	public GameObject blueCoinGen;
+    public GameObject greenCoinGen;
     public GameObject score;
 
 	public void backToOne() {
-		player.GetComponent<collectCollision> ().setCoinCount (0);
-		coinGen.GetComponent<itemPlacementScript> ().genCoins ();
+		player.GetComponent<collectCollision> ().setBlueCoinCount (0);
+        player.GetComponent<collectCollision>().setGreenCoinCount(0);
+        blueCoinGen.GetComponent<itemPlacementScript> ().genCoins ();
+        greenCoinGen.GetComponent<itemPlacementScript>().genCoins();
         score.GetComponent<coinUpdate>().resetCount();
 	}
 }

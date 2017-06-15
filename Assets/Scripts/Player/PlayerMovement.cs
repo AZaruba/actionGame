@@ -176,6 +176,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             currentJumpSpeed = doubleJumpSpeed;
             doubleJump = true;
+            falling = false;
         }
 		if ((Input.GetKeyDown (KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton2)) && grounded)
 		{

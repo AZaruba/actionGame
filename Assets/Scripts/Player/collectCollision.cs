@@ -31,13 +31,22 @@ public class collectCollision : MonoBehaviour {
         }
     }
 
-	public int getCoinCount() {
-		return this.blueCoinCount;
-	}
+	public int getCoinCount(string type) {
+        if (type.Equals("blue"))
+		    return this.blueCoinCount;
+        if (type.Equals("green"))
+            return this.greenCoinCount;
+        return 0;
+    }
 
-	public void setCoinCount(int count) {
+	public void setBlueCoinCount(int count) {
 		this.blueCoinCount = count;
 	}
+
+    public void setGreenCoinCount(int count)
+    {
+        this.blueCoinCount = count;
+    }
 
     public void coinCollision()
     {
