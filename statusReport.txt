@@ -5,11 +5,13 @@ Accomplishments:
     - Ideas abound for how to fix this!
   - Multiple coin types, specified by color, implemented 
     (with minimal effort to add another)
+  - Transitioning between levels upon collection of Blue Crystal works
+  - Little bugs here and there fixed!
 
 To-Do List (6/12-6/19):
-  - SLOPE (95% done!!!)
+  - SLOPES (95% done!!!)
   - Make a real first level
-  - Level transitions
+  - Level transitions (Done!)
   - Fix multiple coin collection (Done!)
 
 Stretch Goals:
