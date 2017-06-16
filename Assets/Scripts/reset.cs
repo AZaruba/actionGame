@@ -8,6 +8,7 @@ public class reset : MonoBehaviour {
 	public GameObject blueCoinGen;
     public GameObject greenCoinGen;
     public GameObject score;
+    public GameObject greenScore;
 
 	public void backToOne() {
 		player.GetComponent<collectCollision> ().setBlueCoinCount (0);
@@ -15,5 +16,6 @@ public class reset : MonoBehaviour {
         blueCoinGen.GetComponent<itemPlacementScript> ().genCoins ();
         greenCoinGen.GetComponent<itemPlacementScript>().genCoins();
         score.GetComponent<coinUpdate>().resetCount();
+        greenScore.GetComponent<coinUpdate>().resetCount();
 	}
 }

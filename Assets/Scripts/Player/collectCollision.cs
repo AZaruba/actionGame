@@ -45,7 +45,7 @@ public class collectCollision : MonoBehaviour {
 
     public void setGreenCoinCount(int count)
     {
-        this.blueCoinCount = count;
+        this.greenCoinCount = count;
     }
 
     public void coinCollision()
