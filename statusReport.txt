@@ -1,4 +1,4 @@
-Status Report 6/12/17
+Status Report 6/12/17-6/19/17
 
 Accomplishments:
   - Slopes working provided walls are perpendicular to ground
@@ -7,10 +7,11 @@ Accomplishments:
     (with minimal effort to add another)
   - Transitioning between levels upon collection of Blue Crystal works
   - Little bugs here and there fixed!
+  - Substantial progress on Beach Level
 
 To-Do List (6/12-6/19):
   - SLOPES (95% done!!!)
-  - Make a real first level
+  - Make a real first level (In progress!)
   - Level transitions (Done!)
   - Fix multiple coin collection (Done!)
 
