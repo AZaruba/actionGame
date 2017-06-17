@@ -8,6 +8,7 @@ public class nextLevelPrompt : MonoBehaviour {
 	public GameObject completeText;
 
 	void OnDestroy() {
-		completeText.GetComponent<UnityEngine.UI.Text> ().text = promptText;
+		if (completeText != null)
+		    completeText.GetComponent<UnityEngine.UI.Text> ().text = promptText;
 	}
 }

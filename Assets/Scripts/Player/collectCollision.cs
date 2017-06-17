@@ -57,13 +57,13 @@ public class collectCollision : MonoBehaviour {
 				Destroy (hitArray [0].gameObject);
 				blueCoinCount++;
 
-				blueScore.collectCoin ();
+				blueScore.collectCoin (blueCoinCount);
 			}
 			if (hitArray [0].gameObject.name.Contains ("greenGem")) {
 				Destroy (hitArray [0].gameObject);
 				greenCoinCount++;
 
-				greenScore.collectCoin ();
+				greenScore.collectCoin (greenCoinCount);
 			}
         }
     }
