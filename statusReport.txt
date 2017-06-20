@@ -1,18 +1,8 @@
 Status Report 6/19/17-6/27/17
 
 Accomplishments:
-  - Slopes working provided walls are perpendicular to ground
-    - Ideas abound for how to fix this!
-  - Multiple coin types, specified by color, implemented 
-    (with minimal effort to add another)
-  - Transitioning between levels upon collection of Blue Crystal works
-  - Little bugs here and there fixed!
-  - Substantial progress on Beach Level
-  - Fixed the gem score display issue
-  - Score texts now grow LEFT so they won't trail off when we add 10+ gems
-  - Basic beach level is working in engine
   - Reintroduced PlayStation shader! Lighting mostly works well now
-
+  - Continued Level production! Gap works perfectly
 To-Do List (6/12-6/19):
   - Fix Lighting on green gems
     - Figure out a normalized way to do lighting for this stuff
