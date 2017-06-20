@@ -1,4 +1,4 @@
-Status Report 6/12/17-6/19/17
+Status Report 6/19/17-6/27/17
 
 Accomplishments:
   - Slopes working provided walls are perpendicular to ground
@@ -11,12 +11,14 @@ Accomplishments:
   - Fixed the gem score display issue
   - Score texts now grow LEFT so they won't trail off when we add 10+ gems
   - Basic beach level is working in engine
+  - Reintroduced PlayStation shader! Lighting mostly works well now
 
 To-Do List (6/12-6/19):
-  - SLOPES (95% done!!!)
-  - Make a real first level (In progress!)
-  - Level transitions (Done!)
-  - Fix multiple coin collection (Done!)
+  - Fix Lighting on green gems
+    - Figure out a normalized way to do lighting for this stuff
+  - Keep building the first level to satisfactory standards
+  - Do cross-platform controller support
+  - Playtest!
 
 Stretch Goals:
   - Implement an enemy
