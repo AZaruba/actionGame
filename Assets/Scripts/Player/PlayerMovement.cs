@@ -34,9 +34,21 @@ public class PlayerMovement : MonoBehaviour {
     private int envMask = 1 << 9;
 
     private collectCollision collectCol;
+	private KeyCode[] controllerKeys;
 
+	void SetControls() {
+		controllerKeys = new KeyCode[16];
+		if (Application.platform.Equals (RuntimePlatform.OSXEditor) || Application.platform.Equals(RuntimePlatform.OSXPlayer)) {
+			controllerKeys [0] = KeyCode.JoystickButton14;
+			controllerKeys [1] = KeyCode.JoystickButton15;
+		} else {
+			controllerKeys [0] = KeyCode.JoystickButton0;
+			controllerKeys [1] = KeyCode.JoystickButton2;
+		}
+	}
 	// Use this for initialization
 	void Start () {
+		SetControls ();
         mainCam = Camera.main;
         grounded = true;
         attacking = false;
@@ -49,6 +61,7 @@ public class PlayerMovement : MonoBehaviour {
 
         collectCol = this.gameObject.GetComponent<collectCollision>();
 		currentWalkSpeed = walkSpeed;
+		SetControls ();
     }
 
     Vector3 wallNormal(Vector3 direction)
@@ -166,19 +179,19 @@ public class PlayerMovement : MonoBehaviour {
 			transform.position += walkInput();
 			transform.position = detectSlope();
         }
-		if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0)) && grounded && !attacking)
+		if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(controllerKeys[0])) && grounded && !attacking)
 		{
 			currentJumpSpeed = jumpSpeed;
 			grounded = false;
 
 		}
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0)) && !grounded && currentJumpSpeed < doubleJumpSpeed && !doubleJump && !attacking)
+		if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(controllerKeys[0])) && !grounded && currentJumpSpeed < doubleJumpSpeed && !doubleJump && !attacking)
         {
             currentJumpSpeed = doubleJumpSpeed;
             doubleJump = true;
             falling = false;
         }
-		if ((Input.GetKeyDown (KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton2)) && grounded)
+		if ((Input.GetKeyDown (KeyCode.LeftShift) || Input.GetKeyDown(controllerKeys[1])) && grounded)
 		{
 			StartCoroutine (dash ());
 		}

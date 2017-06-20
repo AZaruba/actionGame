@@ -3,6 +3,9 @@ Status Report 6/19/17-6/27/17
 Accomplishments:
   - Reintroduced PlayStation shader! Lighting mostly works well now
   - Continued Level production! Gap works perfectly
+  - Cross-platform controller support working!
+  - Vertical camera movement glitchy but existing (currently disabled)
+
 To-Do List (6/12-6/19):
   - Fix Lighting on green gems
     - Figure out a normalized way to do lighting for this stuff
