@@ -5,12 +5,13 @@ Accomplishments:
   - Continued Level production! Gap works perfectly
   - Cross-platform controller support working!
   - Vertical camera movement glitchy but existing (currently disabled)
+  - Lighting works great if we darken the textures!
 
 To-Do List (6/12-6/19):
-  - Fix Lighting on green gems
+  - Fix Lighting on green gems (done!)
     - Figure out a normalized way to do lighting for this stuff
   - Keep building the first level to satisfactory standards
-  - Do cross-platform controller support
+  - Do cross-platform controller support (done!)
   - Playtest!
 
 Stretch Goals:
