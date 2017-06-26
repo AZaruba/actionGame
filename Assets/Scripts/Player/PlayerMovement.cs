@@ -154,7 +154,7 @@ public class PlayerMovement : MonoBehaviour {
             currentJumpSpeed = 0;
 		}
 
-		if (currentPosition.y < -5.0f) {
+		if (currentPosition.y < -20.0f) {
 			transform.position = new Vector3 (0, 0, 6);
             mainCam.transform.position = new Vector3(0, 2, 0);
 			currentJumpSpeed = 0;
