@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Start () {
 		SetControls ();
         mainCam = Camera.main;
-        grounded = true;
+        grounded = false;
         attacking = false;
 		dashing = false;
         doubleJump = false;
