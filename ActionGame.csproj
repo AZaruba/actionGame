@@ -84,8 +84,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GUI\coinUpdate.cs" />
-    <Compile Include="Assets\GUI\moveToNextLevel.cs" />
+    <Compile Include="Assets\GUI\Scripts\coinUpdate.cs" />
+    <Compile Include="Assets\GUI\Scripts\moveToNextLevel.cs" />
+    <Compile Include="Assets\GUI\Scripts\timerUpdate.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Environment\Rotation.cs" />
     <Compile Include="Assets\Scripts\Items\coinRotate.cs" />
