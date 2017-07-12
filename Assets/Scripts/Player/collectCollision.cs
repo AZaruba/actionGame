@@ -64,7 +64,8 @@ public class collectCollision : MonoBehaviour {
 				greenCoinCount++;
 
 				greenScore.collectCoin (greenCoinCount);
-			}
+                GameObject.FindGameObjectWithTag("timer").GetComponent<timerUpdate>().setPaused();
+            }
         }
     }
 
