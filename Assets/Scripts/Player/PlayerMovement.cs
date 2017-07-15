@@ -168,8 +168,9 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		if (currentPosition.y < -50.0f) {
-			mainCam = Camera.main;
-			reset ();
+			GameObject.Find ("levelCompleteText").GetComponent<moveToNextLevel> ().loseLevel();
+			GameObject.Find ("levelCompleteText").GetComponent<moveToNextLevel> ().enabled = true;
+			this.enabled = false;
 		}
 
 		return new Vector3 (0, currentJumpSpeed * Time.deltaTime, 0);
@@ -177,6 +178,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void reset() {
+		mainCam = Camera.main;
 		transform.position = new Vector3 (0, 0, 6);
 		mainCam.transform.position = new Vector3(0, 2, 0);
 		currentJumpSpeed = 0;
