@@ -75,13 +75,13 @@ public class PlayerMovement : MonoBehaviour {
 	Vector3 detectSlope() {
 		/* this vector should have the same origin as the wall one (as if there's anything "forward"
 		   that collides with it, that would be considered a wall! */
-		if (Physics.Raycast (transform.position, downRay, out slopeOut, colliderY,  envMask) && grounded) {
+		if (Physics.Raycast (transform.position, downRay, out slopeOut, colliderY,  envMask) && grounded && mainCam) {
 			mainCam.transform.position = new Vector3 (mainCam.transform.position.x, slopeOut.point.y + colliderY + 2, mainCam.transform.position.z);
 			return new Vector3 (transform.position.x, slopeOut.point.y + colliderY, transform.position.z);
 		}
 		// Downward sloping (we use the distance for this one (currently 0.4) to set the angle limit)
 		Vector3 bottomVec = new Vector3 (transform.position.x, transform.position.y - colliderY, transform.position.z);
-		if (Physics.Raycast (bottomVec, downRay, out slopeOut, 0.4f, envMask) && grounded) {
+		if (Physics.Raycast (bottomVec, downRay, out slopeOut, 0.4f, envMask) && grounded && mainCam) {
 			mainCam.transform.position = new Vector3 (mainCam.transform.position.x, slopeOut.point.y + colliderY + 2, mainCam.transform.position.z);
 			return new Vector3 (transform.position.x, slopeOut.point.y + colliderY, transform.position.z);
 		}
@@ -92,7 +92,12 @@ public class PlayerMovement : MonoBehaviour {
     {
 
         Vector3 direction = new Vector3();
-		Vector3 cameraDirection = new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z);
+		Vector3 cameraDirection;
+		if (mainCam) {
+			cameraDirection = new Vector3 (mainCam.transform.forward.x, 0, mainCam.transform.forward.z);
+		} else {
+			cameraDirection = new Vector3 (0, 0, 1);
+		}
 		float rotationDegree;
         
 		rotationDegree = Mathf.Atan2 (Input.GetAxis("Vertical"), -Input.GetAxis("Horizontal"));
@@ -115,7 +120,9 @@ public class PlayerMovement : MonoBehaviour {
 			transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             direction *= currentWalkSpeed * Time.deltaTime;
         }
-        mainCam.transform.position += direction;
+		if (mainCam) {
+			mainCam.transform.position += direction;
+		}
 
         return direction;
     }
@@ -137,7 +144,9 @@ public class PlayerMovement : MonoBehaviour {
 		if (Physics.Raycast(transform.position, downRay, out groundOut, 0.7f, envMask) && !grounded && falling) {
             Vector3 currentCameraPos = mainCam.transform.position;
 			transform.position = new Vector3 (groundOut.point.x, groundOut.point.y + colliderY, groundOut.point.z);
-            mainCam.transform.position = new Vector3(currentCameraPos.x, groundOut.point.y + colliderY + 2, currentCameraPos.z);
+			if (mainCam) {
+				mainCam.transform.position = new Vector3 (currentCameraPos.x, groundOut.point.y + colliderY + 2, currentCameraPos.z);
+			}
 			currentJumpSpeed = 0;
 			grounded = true;
 			falling = false;
@@ -154,22 +163,31 @@ public class PlayerMovement : MonoBehaviour {
             currentJumpSpeed = 0;
 		}
 
-		if (currentPosition.y < -20.0f) {
-			transform.position = new Vector3 (0, 0, 6);
-            mainCam.transform.position = new Vector3(0, 2, 0);
-			currentJumpSpeed = 0;
-			grounded = true;
-			falling = false;
-            doubleJump = false;
-			if (dashing) {
-				currentWalkSpeed = walkSpeed;
-				dashing = false;
-			}
-			GetComponent<reset> ().backToOne ();
+		if (currentPosition.y < -10.0f) {
+			mainCam = null;
+		}
+
+		if (currentPosition.y < -50.0f) {
+			mainCam = Camera.main;
+			reset ();
 		}
 
 		return new Vector3 (0, currentJumpSpeed * Time.deltaTime, 0);
 
+	}
+
+	void reset() {
+		transform.position = new Vector3 (0, 0, 6);
+		mainCam.transform.position = new Vector3(0, 2, 0);
+		currentJumpSpeed = 0;
+		grounded = true;
+		falling = false;
+		doubleJump = false;
+		if (dashing) {
+			currentWalkSpeed = walkSpeed;
+			dashing = false;
+		}
+		GetComponent<reset> ().backToOne ();
 	}
 
 	// Update is called once per frame
@@ -198,7 +216,9 @@ public class PlayerMovement : MonoBehaviour {
 
         Vector3 jumpResult = jumpInput(transform.position);
 		transform.position += jumpResult;
-        mainCam.transform.position += jumpResult;
+		if (mainCam) {
+			mainCam.transform.position += jumpResult;
+		}
 
         collectCol.coinCollision();
         collectCol.goalItemCollision();
