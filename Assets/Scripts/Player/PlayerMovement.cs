@@ -193,6 +193,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 		if ((Input.GetKeyDown (KeyCode.LeftShift) || Input.GetKeyDown(controllerKeys[1])) && grounded)
 		{
+            doubleJump = true;
 			StartCoroutine (dash ());
 		}
 
