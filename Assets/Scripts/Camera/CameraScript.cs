@@ -8,6 +8,9 @@ public class CameraScript : MonoBehaviour
     public float xSensitivity;
     public float ySensitivity;
     private GameObject player;
+	private Vector3 finalPosition;
+
+	private bool failState;
 
     void Start()
     {
@@ -16,6 +19,8 @@ public class CameraScript : MonoBehaviour
 		renderTexture.height = Screen.height / 4;
 		Camera.main.ResetAspect ();
 		Camera.main.targetTexture = renderTexture;
+
+		failState = false;
     }
 
     void OnGUI()
@@ -29,5 +34,13 @@ public class CameraScript : MonoBehaviour
         transform.LookAt(player.transform.position);
         transform.RotateAround(player.transform.position, Vector3.up, Input.GetAxis("RHorizontal") * xSensitivity * Time.deltaTime);
         //transform.RotateAround(player.transform.position, transform.right, Input.GetAxis("RVertical") * ySensitivity * Time.deltaTime);
-    }    
+		if (transform.position.y < -5.0f) {
+			if (!failState) {
+				finalPosition = transform.position;
+				transform.position = finalPosition;
+				failState = true;
+				transform.parent = null;
+			}
+		}
+	}    
 }

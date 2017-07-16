@@ -77,6 +77,8 @@ public class collectCollision : MonoBehaviour {
 				Destroy (hitArray [0].gameObject.GetComponent<goalItemInteraction> ().scoreText);
 				Destroy (hitArray [0].gameObject);
                 GameObject.FindGameObjectWithTag("timer").GetComponent<timerUpdate>().setFinished();
+				GameObject.Find ("levelCompleteText").GetComponent<moveToNextLevel> ().completeLevel();
+				GameObject.Find ("levelCompleteText").GetComponent<moveToNextLevel> ().enabled = true;
 			}
 			if (hitArray [0].name.Contains ("green") && greenScore.coinsInLevel == greenCoinCount) {
 				Destroy (hitArray [0].gameObject.GetComponent<goalItemInteraction> ().scoreText);
